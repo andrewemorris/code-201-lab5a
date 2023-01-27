@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 /////////////////////////////////////
 /* Problem 1 (this is your demo that we'll solve in class)
 Write a function called sum() that takes in two numbers as arguments and then returns an array where the first element is the sum of those numbers, and the second element is a concatenated string that EXACTLY follows this example and uses the values that were input into the function:
@@ -126,11 +126,43 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function multiplyArray(multArr) { //eslint-disable-line
+  let multStr = '';
 
+  console.log('length = ' + multArr.length);
+  for (let i = 0; i < multArr.length; i++) {
+    //console.log('i = ' + i);
+    if (i === 0) {
+      multStr = multArr[i];
+    }
+    else {
+      multStr = multStr + ',' + multArr[i];
+    }
+    //console.log('multStr = ' + multStr);
+  }
+
+  let mult = arraymult(multArr);
+  //console.log('mult = ' + mult);
+  //console.log('multStr = ' + multStr);
+
+  console.log('The numbers ' + multStr + ' have a product of ' + mult + '.');
+
+  console.log([mult, 'The numbers ' + multStr + ' have a product of ' + mult + '.']);
+
+  return [mult, 'The numbers ' + multStr + ' have a product of ' + mult + '.'];
+}
+
+function arraymult(multArr) {  //eslint-disable-line
+  if (multArr.length === 1) {
+    return (multArr[0]);
+  } if (multArr.length === 2) {
+    return (multiply(multArr[0], multArr[1])[0]);
+  } else {
+    return (multiply(multArr[0], arraymult(multArr.slice(1)))[0]); // why slice, pop doesn't work  multArr.pop() 
+  }
 }
 
 // Here is the test for multiplyArray(); uncomment it to run it
-// testMultiplyArray(testArray);
+testMultiplyArray(testArray);
 
 // Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. 
 
@@ -154,10 +186,10 @@ Test this function by hand in the console to get it working, and when you think 
 let testDynamicArray = [1, 2, 3, 4, 5]; //eslint-disable-line
 
 function multiplyAnyArray(dynamicArray) { //eslint-disable-line
-
+  return multiplyArray(dynamicArray);
 }
 
 // Here is the test for multiplyArray(); uncomment it to run it
-// testMultiplyAnyArray(testDynamicArray);
+testMultiplyAnyArray(testDynamicArray);
 
 // Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. You're done! Submit the link to the repo following the instructions in Canvas.
